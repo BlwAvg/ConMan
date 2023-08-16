@@ -29,10 +29,11 @@ ConMan/
 |   |-- Users with no Home directory here  
 
 ## Notes:
-The key directory allows users to be made without a home directory and their keys or authorized keys are stored.
-	- Modify /etc/ssh/sshd_config
-AuthorizedKeysFile LocationTo/ConMan/keys/%u
-
+- The key directory allows users to be made without a home directory and their keys or authorized keys are stored.
+- - Modify /etc/ssh/sshd_config and add  
+- - AuthorizedKeysFile LocationTo/ConMan/keys/%u
+- This assumes "ss" and "ip" commands are installed on the OS
+- Installed on Ubuntu Server
 
 ## What exists:
 - I have a user creation page that barely works

@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for, flash, jsonify, send_from_directory
 import subprocess
 import os
+import requests
 
 app = Flask(__name__, static_folder="static", template_folder="static")
 app.secret_key = "supersecretkey"
@@ -170,6 +171,65 @@ def get_private_key(username, filename):
             return jsonify(private_key=private_key)
     else:
         return jsonify(error="Private key not found."), 404
+
+############ NETWORK INFO PAGE ###############
+def parse_ip_addr(output):
+    interfaces = []
+    current_interface = None
+
+    for line in output.split('\n'):
+        if line and not line[0].isspace():
+            if current_interface:
+                interfaces.append(current_interface)
+            current_interface = {
+                "interface": line.split(':')[1].strip(),
+                "ip": None,
+                "subnet": None
+            }
+        elif 'inet ' in line:
+            inet_data = line.strip().split(' ')
+            ip, subnet = inet_data[1].split('/')
+            current_interface["ip"] = ip
+            current_interface["subnet"] = subnet
+
+    if current_interface:
+        interfaces.append(current_interface)
+
+    return interfaces
+
+@app.route('/network-info')
+def network_info():
+    return send_from_directory('static', 'network-info.html')
+
+@app.route('/network-data')
+def network_data():
+    data = {}
+
+    # Fetch command outputs
+    data['ss_ltua'] = subprocess.check_output("ss -ltua", shell=True).decode('utf-8')
+    data['ss_s'] = subprocess.check_output("ss -s", shell=True).decode('utf-8')
+    data['ip_route'] = subprocess.check_output("ip route", shell=True).decode('utf-8')
+
+    # Parse interface data 
+    ip_addr_output = subprocess.check_output("ip addr", shell=True).decode('utf-8')
+    data['ip_addr'] = parse_ip_addr(ip_addr_output)
+
+    # Fetch default gateway
+    ip_route_output = subprocess.check_output("ip route", shell=True).decode('utf-8')
+    default_gateway = next((line.split()[-3] for line in ip_route_output.split('\n') if line.startswith('default')), None)
+    data['default_gateway'] = default_gateway
+
+    # Fetch DNS servers
+    with open('/etc/resolv.conf', 'r') as f:
+        lines = f.readlines()
+    dns_servers = [line.split()[-1] for line in lines if line.startswith('nameserver')]
+    data['dns_servers'] = dns_servers
+
+    # Fetch public IP
+    data['public_ip'] = requests.get('https://icanhazip.com').text.strip()
+
+    return jsonify(data)
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=80, debug=True)
