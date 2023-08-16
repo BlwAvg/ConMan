@@ -16,17 +16,17 @@ I dont code and have no idea what I am doing. I am not responsible for anything 
 6. Access the server over http://ip.addr.here.plz  the app uses port 80 
 
 ## File Structure:
-ConMan/
-|-- app.py
-|-- static/
-|   |-- favicon.ico
-|   |-- index.html
-|   |-- users.html
-|   |-- key-manager.html
-|   |-- styles.css
-|   |-- script.js
-|-- keys/
-|   |-- Users with no Home directory here
+ConMan/  
+|-- app.py  
+|-- static/  
+|   |-- favicon.ico  
+|   |-- index.html  
+|   |-- users.html  
+|   |-- key-manager.html  
+|   |-- styles.css  
+|   |-- script.js  
+|-- keys/  
+|   |-- Users with no Home directory here  
 
 ## Notes:
 The key directory allows users to be made without a home directory and their keys or authorized keys are stored.
