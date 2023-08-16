@@ -6,13 +6,13 @@ I dont code and have no idea what I am doing. I am not responsible for anything 
 
 ## Getting Started
 1. Download the files
-2. Install PIP
-    sudo apt install python3-pip
-3. Install flask
-    pip install Flask
-4. change ConMan directory
-5. Run the application
-    python3 app.py
+2. Install PIP  
+    "sudo apt install python3-pip"
+3. Install flask  
+    "pip install Flask"
+4. change to the ConMan directory
+5. Run the application  
+    "python3 app.py"
 6. Access the server over http://ip.addr.here.plz  the app uses port 80 
 
 ## File Structure:
@@ -20,11 +20,9 @@ ConMan/
 |-- app.py  
 |-- static/  
 |   |-- favicon.ico  
-|   |-- index.html  
-|   |-- users.html  
-|   |-- key-manager.html  
+|   |-- static_html_here.html    
 |   |-- styles.css  
-|   |-- script.js  
+|   |-- scripts_here.js  
 |-- keys/  
 |   |-- Users with no Home directory here  
 
