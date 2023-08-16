@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Main Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h1>Welcome to the Linux Management Dashboard</h1>
+
+    <p>
+        This web interface provides tools to manage various aspects of a Linux system. You can manage users, handle SSH keys, and much more. Below are quick links to the available management tools:
+    </p>
+
+    <ul>
+        <li><a href="/users">User Manager</a> - Add and view system users.</li>
+        <li><a href="/key-manager">Key Manager</a> - Manage SSH keys for secure access.</li>
+    </ul>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Key Manager</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+
+<body>
+    <div class="container">
+        <h2>Key Manager</h2>
+        <div>
+            <input type="text" id="usernameInput" placeholder="Enter username">
+            <button onclick="generateKeyForUser()">Generate Key</button>
+        </div>
+
+        <button onclick="fetchKeys()">Refresh</button>
+
+        <table id="keysTable">
+            <thead>
+                <tr>
+                    <th>Select</th>
+                    <th>Name</th>
+                    <th>User</th>
+                    <th>Path</th>
+                    <th>Type</th>
+                    <th>Encryption</th>
+                    <th>Copy Key</th>
+                </tr>
+            </thead>
+            <tbody id="keysTableBody"></tbody>
+        </table>
+        
+        <button onclick="deleteSelectedKeys()">Delete Selected</button>
+    
+    </div>
+    <script src="/static/script.js"></script>
+</body>
+
+</html>

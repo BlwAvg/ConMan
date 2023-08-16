@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Manage Users</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <script src="{{ url_for('static', filename='script.js') }}" defer></script>
+</head>
+<body>
+    <h1>Manage Linux Users</h1>
+
+    <form id="userForm" action="/users" method="post">
+        <input id="usernameInput" type="text" name="username" placeholder="Username">
+        <label><input type="checkbox" name="nohome"> No Home Directory</label>
+        <button type="submit">Add User</button>
+    </form>
+
+<button id="refreshButton">Refresh</button>
+
+    <form action="/delete-user" method="post">
+        {% for category in ["Full Accounts", "Connection Accounts", "System Accounts"] %}
+        <h2>{{ category }}</h2>
+        <table>
+            <thead>
+                <tr>
+                    {% if category != "System Accounts" %}
+                    <th>Select</th>
+                    {% endif %}
+                    <th>Username</th>
+                    <th>Groups</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user, details in users.items() if details["category"] == category %}
+                <tr>
+                    {% if category != "System Accounts" %}
+                    <td><input type="checkbox" name="user-checkbox" value="{{ user }}"></td>
+                    {% endif %}
+                    <td>{{ user }}</td>
+                    <td>{{ ", ".join(details["groups"]) }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        {% if category != "System Accounts" %}
+        <button type="submit">Delete</button>
+        {% endif %}
+        {% endfor %}
+    </form>
+
+    {% for message, category in get_flashed_messages(with_categories=True) %}
+    <div class="{{ category }}">{{ message }}</div>
+    {% endfor %}
+</body>
+</html>

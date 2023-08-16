@@ -1,0 +1,41 @@
+body {
+    background-color: black;
+    color: #00FF00;  /* Green color */
+    font-family: 'Courier New', Courier, monospace; /* Matrix-like font */
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    color: #00FF00;
+}
+
+th, td {
+    border: 1px solid #00FF00;  /* Green border */
+    padding: 8px 12px;
+    text-align: left;
+}
+
+th {
+    background-color: #1a1a1a;  /* Dark gray for headers */
+}
+
+button {
+    background-color: #1a1a1a;
+    color: #00FF00;
+    border: 1px solid #00FF00;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #00FF00;
+    color: black;
+}
+
+input {
+    background-color: #1a1a1a;
+    color: #00FF00;
+    border: 1px solid #00FF00;
+    padding: 5px 10px;
+}
