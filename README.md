@@ -28,7 +28,6 @@ ConMan/
 |-- keys/
 |   |-- Users with no Home directory here
 
-
 ## Notes:
 The key directory allows users to be made without a home directory and their keys or authorized keys are stored.
 	- Modify /etc/ssh/sshd_config
