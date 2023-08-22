@@ -1,5 +1,5 @@
 # ConMan
-This is a Connection Manager (ConMan). The purpose is to provide a UI for managing revese shells. I will sometimes setup remote shells family memebers machines to connect back to a remote host. I can connect from my machine and jump to this host to do what ever I need to do to fix my family members computer. 
+This is a Connection Manager (ConMan). The purpose is to provide a UI for managing revese shells on Ubuntu. I will sometimes setup remote shells family memebers machines to connect back to a remote host. I can connect from my machine and jump to this host to do what ever I need to do to fix my family members computer. 
 
 ## ****DISCLAIMER**** 
 I dont code and have no idea what I am doing. I am not responsible for anything you do with this code or whatever this code does to you, or anything you own. 
@@ -17,7 +17,7 @@ I dont code and have no idea what I am doing. I am not responsible for anything 
 
 ## File Structure:
 ConMan/  
-|-- python_apps_here.py
+|-- python_apps_here.py  
 |-- favicon.ico  
 |-- static/  
 |   |-- favicon.ico  
@@ -42,10 +42,11 @@ ConMan/
 -- syslog is listed under full accounts and not system accounts
 - I have a key management page that barely works
 - Really need to add a navigation bar
+- Get someone who actually knows how to code
 
 
 ## Roadmap:
-- Create a connection management page
+- Make the pages work
 - Fix stuff that dont look gud
 - Take the pages to barely functional to kind of functional
 - Customizable ssh encryption from the key manager page
