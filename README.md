@@ -12,12 +12,13 @@ I dont code and have no idea what I am doing. I am not responsible for anything 
     "pip install Flask"
 4. change to the ConMan directory
 5. Run the application  
-    "python3 app.py"
+    "sudo python3 app.py"
 6. Access the server over http://ip.addr.here.plz  the app uses port 80 
 
 ## File Structure:
 ConMan/  
-|-- app.py  
+|-- python_apps_here.py
+|-- favicon.ico  
 |-- static/  
 |   |-- favicon.ico  
 |   |-- static_html_here.html    
@@ -27,17 +28,24 @@ ConMan/
 |   |-- Users with no Home directory here  
 
 ## Notes:
+- Do no open this server up to the internet. This has more security holes than a medieval castle under siege.
 - The key directory allows users to be made without a home directory and their keys or authorized keys are stored.
 - - Modify /etc/ssh/sshd_config and add  
 - - AuthorizedKeysFile LocationTo/ConMan/keys/%u
 - This assumes "ss" and "ip" commands are installed on the OS
 - Installed on Ubuntu Server
+- need to run as root (and install flask as root), otherwise when you run the command you may have to enter a password for things that require elevated privilages
 
-## What exists:
+## Need to fix:
 - I have a user creation page that barely works
+-- Fix the "no home directory option"
+-- syslog is listed under full accounts and not system accounts
 - I have a key management page that barely works
+- Really need to add a navigation bar
+
 
 ## Roadmap:
 - Create a connection management page
 - Fix stuff that dont look gud
 - Take the pages to barely functional to kind of functional
+- Customizable ssh encryption from the key manager page

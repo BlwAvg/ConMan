@@ -19,7 +19,37 @@ $(document).ready(function(){
             }
             $('#ss-ltua').html(ss_ltua_table);
 
-            // Other tables...
+                        // Other tables...
+            
+            // IP Routing Table
+            let ip_route_table = '<tr><th>Destination</th><th>Gateway</th><th>Genmask</th><th>Flags</th><th>Metric</th><th>Ref</th><th>Use</th><th>Iface</th></tr>';
+            for (let entry of data.parsed_ip_route) {
+                ip_route_table += `<tr>
+                    <td>${entry[0] || ''}</td>
+                    <td>${entry[1] || ''}</td>
+                    <td>${entry[2] || ''}</td>
+                    <td>${entry[3] || ''}</td>
+                    <td>${entry[4] || ''}</td>
+                    <td>${entry[5] || ''}</td>
+                    <td>${entry[6] || ''}</td>
+                    <td>${entry[7] || ''}</td>
+                </tr>`;
+            }
+            $('#ip-route').html(ip_route_table);
+
+            // Active SSH Connections table
+            let ssh_connections_table = '<tr><th>COMMAND</th><th>PID</th><th>USER</th><th>FD</th><th>TYPE</th><th>NAME</th></tr>';
+            for (let entry of data.ssh_connections) {
+                ssh_connections_table += `<tr>
+                    <td>${entry[0]}</td>
+                    <td>${entry[1]}</td>
+                    <td>${entry[2]}</td>
+                    <td>${entry[3]}</td>
+                    <td>${entry[4]}</td>
+                    <td>${entry[8]}</td>
+                </tr>`;
+            }
+            $('#ssh-connections').html(ssh_connections_table);
 
             // IP Address table
             let interface_table = '<tr><th>Interface</th><th>IP</th><th>Subnet</th><th>Gateway</th></tr>';

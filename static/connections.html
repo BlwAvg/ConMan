@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SSH Connection Manager</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <!-- Button Controls -->
+    <div class="controls">
+        <button id="refresh">Refresh</button>
+        <button id="create">Create</button>
+        <button id="edit">Edit</button>
+        <button id="delete">Delete</button>
+    </div>
+
+    <!-- Main Table -->
+    <table id="mainTable">
+        <!-- Table headers -->
+        <thead>
+            <tr>
+                <th>Select</th>
+                <th>Status</th>
+                <th>Name</th>
+                <th>User</th>
+                <th>Remote Client</th>
+                <th>Remote Client Port</th>
+                <th>Server</th>
+                <th>Server Ports</th>
+                <th>Certificate</th>
+                <th>lsof Status</th>
+                <th>ss Status</th>
+                <th>Client Command</th>
+            </tr>
+        </thead>
+
+        <!-- Table body -->
+        <tbody>
+            <!-- Sample Row (can be cloned and populated with JavaScript) -->
+            <tr>
+                <td><input type="checkbox" class="rowSelect"></td>
+                <td class="statusCell">N/A</td>
+                <td contenteditable="true" class="nameCell">Editable Name</td>
+                <td>
+                    <select class="userDropdown">
+                        <!-- Populated by script.js -->
+                    </select>
+                </td>
+                <td contenteditable="true" class="remoteClientCell">Editable Client</td>
+                <td contenteditable="true" class="remoteClientPortCell">Editable Port</td>
+                <td class="serverCell">Hostname</td>
+                <td contenteditable="true" class="serverPortsCell">Editable Server Ports</td>
+                <td>
+                    <select class="certDropdown">
+                        <!-- Populated by script.js -->
+                    </select>
+                </td>
+                <td><button class="lsofBtn">Status</button></td>
+                <td><button class="ssBtn">Status</button></td>
+                <td><button class="clientCmdBtn">Show</button></td>
+            </tr>
+            <!-- Additional rows will be added dynamically -->
+        </tbody>
+    </table>
+
+    <!-- Including the JS script -->
+<script src="/static/js-con-info.js"></script>
+</body>
+</html>
