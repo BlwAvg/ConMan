@@ -12,6 +12,73 @@ window.addEventListener('DOMContentLoaded', (event) => {
     deleteButton.addEventListener('click', deleteSelectedKeys);
 });
 
+// This generates the ssh key
+function updateBitsOrIterationsDropdown() {
+    const encryptionType = document.getElementById('encryptionType').value;
+    const dropdown = document.getElementById('bitsOrIterations');
+    dropdown.innerHTML = ''; // Clear current options
+
+    let options = [];
+    if (['dsa', 'ecdsa', 'ecdsa-sk', 'rsa'].includes(encryptionType)) {
+        // Bits options
+        const bitsOptions = {
+            'dsa': [1024],
+            'ecdsa': [256, 384, 521],
+            'ecdsa-sk': [256, 384, 521],
+            'rsa': [1024, 2048, 4096]
+        };
+        options = bitsOptions[encryptionType];
+    } else if (['ed25519', 'ed25519-sk'].includes(encryptionType)) {
+        // Iterations options
+        options = [16, 64, 100, 1000];
+    }
+
+    options.forEach(opt => {
+        const optionElement = document.createElement('option');
+        optionElement.value = opt;
+        optionElement.textContent = opt;
+        dropdown.appendChild(optionElement);
+    });
+}
+
+function populateUserDropdown() {
+    const dropdown = document.getElementById('usernameDropdown');
+    dropdown.innerHTML = '';  // Clear current options
+
+    window.usersData.full_users.forEach(user => {
+        const optionElement = document.createElement('option');
+        optionElement.value = user;
+        optionElement.textContent = `${user} (Full)`;
+        dropdown.appendChild(optionElement);
+    });
+
+    window.usersData.connection_users.forEach(user => {
+        const optionElement = document.createElement('option');
+        optionElement.value = user;
+        optionElement.textContent = `${user} (Connection)`;
+        dropdown.appendChild(optionElement);
+    });
+}
+
+function generateKeyForUser() {
+    const username = document.getElementById('usernameInput').value;
+    const encryptionType = document.getElementById('encryptionType').value;
+    const bitsOrIterations = document.getElementById('bitsOrIterations').value;
+
+    if (!username) {
+        alert('Please enter a username');
+        return;
+    }
+
+    fetch(`/generate_ssh_key/${username}`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ encryptionType, bitsOrIterations })
+    })
+
+
 // Function to fetch the keys from the backend and populate them into the table.
 function fetchKeys() {
     fetch('/get_keys')

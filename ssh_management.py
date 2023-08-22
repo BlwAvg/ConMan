@@ -2,6 +2,35 @@ from flask import jsonify, request
 import os
 import subprocess
 
+""" Generation of the SSH key """
+def generate_ssh_key(username):
+    data = request.json
+    encryptionType = data['encryptionType']
+    bitsOrIterations = data['bitsOrIterations']
+
+    command = ['ssh-keygen', '-t', encryptionType]
+
+    if encryptionType in ['dsa', 'ecdsa', 'ecdsa-sk', 'rsa']:
+        command.extend(['-b', str(bitsOrIterations)])
+    else:
+        command.extend(['-a', str(bitsOrIterations)])
+
+    command.extend(['-f', key_path, '-N', ''])
+
+    subprocess.run(command)
+    return jsonify(success=True)
+
+""" Drop down for all users """
+def get_all_users():
+    # Fetch Full Users
+    full_users = [user for user in os.listdir('/home') if user != "lost+found"] + ["root"]
+
+    # Fetch Connection Users
+    connection_users_path = '/opt/ConMan/keys'
+    connection_users = os.listdir(connection_users_path)
+
+    return jsonify(full_users=full_users, connection_users=connection_users)
+
 def generate_ssh_key(username):
     """Generate an SSH key for the specified username."""
     home_dir = f'/home/{username}'

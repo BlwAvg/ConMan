@@ -21,6 +21,8 @@ app.add_url_rule('/fetch-users', 'fetch_users', fetch_users)
 app.add_url_rule('/delete-user', 'delete_user', delete_user, methods=['POST'])
 
 # key-manager routes
+#app.add_url_rule('/get_all_users', 'get_all_users', get_all_users, methods=['GET'])
+app.add_url_rule('/api/users', 'api_users', connections.fetch_users)
 app.add_url_rule('/key-manager', 'key_manager', lambda: send_from_directory('static', 'key-manager.html'))
 app.add_url_rule('/static/<path:path>', 'serve_static', lambda path: send_from_directory('static', path))
 app.add_url_rule('/generate_ssh_key/<username>', 'generate_ssh_key', generate_ssh_key, methods=['POST'])

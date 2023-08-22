@@ -11,10 +11,27 @@
 <body>
     <div class="container">
         <h2>Key Manager</h2>
-        <div>
-            <input type="text" id="usernameInput" placeholder="Enter username">
-            <button onclick="generateKeyForUser()">Generate Key</button>
-        </div>
+
+<h3>Generate SSH Key</h3>
+<label for="usernameDropdown">Username:</label>
+<select id="usernameDropdown">
+    <!-- Options will be dynamically populated based on both user types -->
+</select>
+<label for="encryptionType">Encryption Type:</label>
+<select id="encryptionType" onchange="updateBitsOrIterationsDropdown()">
+    <option value="dsa">dsa</option>
+    <option value="ecdsa">ecdsa</option>
+    <option value="ecdsa-sk">ecdsa-sk</option>
+    <option value="rsa">rsa</option>
+    <option value="ed25519">ed25519</option>
+    <option value="ed25519-sk">ed25519-sk</option>
+</select>
+
+<label for="bitsOrIterations">Bits/Iterations:</label>
+<select id="bitsOrIterations">
+    <!-- Options will be dynamically populated based on encryption type -->
+</select>
+<button onclick="generateKeyForUser()">Generate Key</button>
 
         <button onclick="fetchKeys()">Refresh</button>
 

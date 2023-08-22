@@ -1,8 +1,5 @@
-import connections
 import os
 import subprocess
-import sys
-sys.path.append('/opt/ConMan')  # add the directory to Python's module search path
 
 def fetch_users():
     full_users = [user for user in os.listdir('/home') if os.path.isdir(os.path.join('/home', user)) or user == "root"]
