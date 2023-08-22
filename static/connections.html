@@ -1,71 +1,74 @@
+<!-- 
+1. The table row provided is an example structure of what a row might look like. When implementing dynamic row creation, editing, or deletion, this structure will be used as a template.
+2. You'll need to handle the dynamic population of certain elements, such as the User dropdown and Certificate dropdown, using the JavaScript functions provided earlier.
+3. The hostname for the Server column is hardcoded as "ServerHostName" for demonstration. In a real-world scenario, you'd probably populate this dynamically based on the server's hostname.
+4. The functions (checkLsofStatus, checkSS, getClientCommand, etc.) are assumed to be present in the connections.js file.
+5. The contenteditable attribute on certain <td> elements allows users to directly edit the content. You might want to replace this with input elements or other UI components for a more refined user experience.
+-->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SSH Connection Manager</title>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <title>Connection Manager</title>
+    <script src="connections.js" defer></script>
     <link rel="stylesheet" href="/static/styles.css">
 </head>
 <body>
-    <!-- Button Controls -->
-    <div class="controls">
-        <button id="refresh">Refresh</button>
-        <button id="create">Create</button>
-        <button id="edit">Edit</button>
-        <button id="delete">Delete</button>
-    </div>
 
-    <!-- Main Table -->
-    <table id="mainTable">
-        <!-- Table headers -->
-        <thead>
-            <tr>
-                <th>Select</th>
-                <th>Status</th>
-                <th>Name</th>
-                <th>User</th>
-                <th>Remote Client</th>
-                <th>Remote Client Port</th>
-                <th>Server</th>
-                <th>Server Ports</th>
-                <th>Certificate</th>
-                <th>lsof Status</th>
-                <th>ss Status</th>
-                <th>Client Command</th>
-            </tr>
-        </thead>
+<h2>Connection Manager</h2>
 
-        <!-- Table body -->
-        <tbody>
-            <!-- Sample Row (can be cloned and populated with JavaScript) -->
-            <tr>
-                <td><input type="checkbox" class="rowSelect"></td>
-                <td class="statusCell">N/A</td>
-                <td contenteditable="true" class="nameCell">Editable Name</td>
-                <td>
-                    <select class="userDropdown">
-                        <!-- Populated by script.js -->
-                    </select>
-                </td>
-                <td contenteditable="true" class="remoteClientCell">Editable Client</td>
-                <td contenteditable="true" class="remoteClientPortCell">Editable Port</td>
-                <td class="serverCell">Hostname</td>
-                <td contenteditable="true" class="serverPortsCell">Editable Server Ports</td>
-                <td>
-                    <select class="certDropdown">
-                        <!-- Populated by script.js -->
-                    </select>
-                </td>
-                <td><button class="lsofBtn">Status</button></td>
-                <td><button class="ssBtn">Status</button></td>
-                <td><button class="clientCmdBtn">Show</button></td>
-            </tr>
-            <!-- Additional rows will be added dynamically -->
-        </tbody>
-    </table>
+<button onclick="createRow()">Create</button>
 
-    <!-- Including the JS script -->
-<script src="/static/js-con-info.js"></script>
+<table border="1">
+    <thead>
+        <tr>
+            <th>Status</th>
+            <th>Name</th>
+            <th>User</th>
+            <th>Remote Client</th>
+            <th>Remote Client Port(s)</th>
+            <th>Server</th>
+            <th>Server Port(s)</th>
+            <th>Certificate</th>
+            <th>lsof</th>
+            <th>ss</th>
+            <th>Client Command</th>
+            <th>Checkbox</th>
+        </tr>
+    </thead>
+    <tbody>
+        <!-- Example row structure, can be dynamically generated using JavaScript -->
+        <tr class="connection-row">
+            <td><button class="status-button">Not Checked</button></td>
+            <td contenteditable="true">Custom Name</td>
+            <td>
+                <select class="user-dropdown">
+                    <!-- Options will be dynamically populated using JavaScript -->
+                </select>
+            </td>
+            <td contenteditable="true">IP/DNS</td>
+            <td contenteditable="true">8080,8081</td>
+            <td>ServerHostName</td> <!-- This will be dynamically populated -->
+            <td contenteditable="true">22,23</td>
+            <td>
+                <select class="certificate-dropdown">
+                    <!-- Options will be dynamically populated based on the user selected -->
+                </select>
+            </td>
+            <td><button onclick="checkLsofStatus(this.closest('.connection-row'))">Status</button></td>
+            <td><button onclick="checkSS(this.closest('.connection-row'))">Check</button></td>
+            <td><button onclick="getClientCommand(this.closest('.connection-row'))">Show</button></td>
+            <td><input type="checkbox" class="select-checkbox"></td>
+        </tr>
+        <!-- Additional rows will be similar to the structure above -->
+    </tbody>
+</table>
+
+<button onclick="deleteRows()">Delete</button>
+<button onclick="editRows()">Edit</button>
+<button onclick="refreshTable()">Refresh</button>
+
 </body>
 </html>
